@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="fotos/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="style.css">
+  <title>Jogo Jokenpô</title>
+</head>
+
+<body>
+  <header>
+    <h1 class="header__title">Jogo Jokenpô</h1>
+  </header>
+
+  <main>
+    <section class="container__play">
+      <h3 class="play__title">Resultado: Você:<samp class="your__points">0</samp> / Computador:<samp class="computer__points">0</samp></h3>
+
+      <section class="place__answers">
+
+        <section class="results">
+          <h5 class="player__result"></h5>
+          <div class="div__option your__answer"></div>
+        </section>
+
+        <section class="results">
+          <h5 class="computer__result"></h5>
+          <div class="div__option computer__answer"></div>
+        </section>
+
+      </section>
+      <h1 class="winner"></h1>
+    </section>
+
+    <section>
+      <h3>Faça sua jogada!</h3>
+      <section class="button__container">
+        <button class="btn__option"><img src="fotos/pedra.jpg" alt="pedra"></button>
+        <button class="btn__option"><img src="fotos/papel.jpg" alt="papel"></button>
+        <button class="btn__option"><img src="fotos/tesoura.jpg" alt="tesoura"></button>
+      </section>
+    </section>
+
+    <button class="btn__clean">Limpar</button>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
