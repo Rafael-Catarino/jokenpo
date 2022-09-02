@@ -1,11 +1,19 @@
 const comput = ['pedra', 'papel', 'tesoura'];
+
+const h1Result = document.querySelector('.winner');
 const btnsPlay = document.querySelectorAll('.btn__option');
+const yourAnswer = document.querySelector('.your__answer');
+const imgYourAnswer = document.createElement('img');
+const yourP = document.querySelector('.player__result');
+const computerAnswer = document.querySelector('.computer__answer');
+const imgComputerAnswer = document.createElement('img');
+const computerP = document.querySelector('.computer__result');
 
 const startGame = () => {
   const result = event.target.alt;
   checkComputerResponse();
   checkYourAnswer();
-  yourAnswer(result);
+  createYourAnswer(result);
   computerPlaying(result);
 }
 
@@ -15,8 +23,10 @@ const btnStartGame = () => {
   }
 }
 
-btnStartGame()
+btnStartGame();
 
+
+//Refatorandoo código
 /* const bntStone = document.querySelector('#bnt-stone');
 bntStone.addEventListener('click', () => {
   checkComputerResponse();
@@ -38,7 +48,6 @@ function checkYourAnswer() {
 }
 
 // Refatorando o código
-
 /* const btnPaper = document.querySelector('#btn-paper');
 btnPaper.addEventListener('click', () => {
   checkComputerResponse();
@@ -57,12 +66,12 @@ btnScissors.addEventListener('click', () => {
 
 function computerPlaying(result) {
   const num = Math.floor(Math.random() * 3);
-  computerAnswer(num);
+  createComputerAnswer(num);
   gameResult(num, result);
 }
 
-
-function yourAnswer(result) {
+//Refatorando o código.
+/* function yourAnswer(result) {
   const yourAnswer = document.querySelector('.your__answer');
   const imgYourAnswer = document.createElement('img');
   const yourP = document.querySelector('.player__result');
@@ -84,9 +93,28 @@ function yourAnswer(result) {
     yourAnswer.appendChild(imgYourAnswer);
     yourP.innerHTML = 'Você escolheu TESOURA!'
   }
+} */
+
+function createYourAnswer(result) {
+  if (result === 'pedra') {  
+    enteringYourAnswer(result);
+  } else if (result === 'papel') {
+    enteringYourAnswer(result);
+  } else if (result === 'tesoura') {
+    enteringYourAnswer(result);
+  }
 }
 
-function computerAnswer(result) {
+function enteringYourAnswer(result) {
+  imgYourAnswer.src = `fotos/${result}.jpg`;
+  imgYourAnswer.classList.add("imgYourAnswer");
+  yourAnswer.appendChild(imgYourAnswer);
+  yourP.innerHTML = `Você escolheu ${result.toUpperCase()}!`
+}
+
+
+//Refatorandoo código
+/* function computerAnswer(result) {
   const computerAnswer = document.querySelector('.computer__answer');
   const imgComputerAnswer = document.createElement('img');
   const computerP = document.querySelector('.computer__result');
@@ -108,10 +136,27 @@ function computerAnswer(result) {
     computerAnswer.appendChild(imgComputerAnswer);
     computerP.innerHTML = 'Computador escolheu TESOURA';
   }
+} */
+
+function createComputerAnswer(result) {
+  if (comput[result] === 'pedra') {
+    enteringComputerAnswer('pedra');
+  } else if (comput[result] === 'papel') {
+    enteringComputerAnswer('papel');
+  } else if (comput[result] === 'tesoura') {
+    enteringComputerAnswer('tesoura');
+  }
+}
+
+function enteringComputerAnswer(result) {
+  imgComputerAnswer.src = `fotos/${result}.jpg`;
+  imgComputerAnswer.classList.add("imgComputerAnswer");
+  computerAnswer.appendChild(imgComputerAnswer);
+  computerP.innerHTML = `Computador escolheu ${result.toUpperCase()}`;
 }
 
 
-let contComputer = 0;
+/* let contComputer = 0;
 let contYour = 0;
 function gameResult(computResult, yourResult) {
   const h1Result = document.querySelector('.winner');
@@ -146,6 +191,42 @@ function gameResult(computResult, yourResult) {
   } else if (comput[computResult] === 'tesoura' && yourResult === 'tesoura') {
     h1Result.innerHTML = 'EMPATOU!!!';
   }
+} */
+
+let contComputer = 0;
+let contYour = 0;
+function gameResult(computResult, yourResult) {
+  if (comput[computResult] === 'pedra' && yourResult === 'pedra') {
+    h1Result.innerHTML = 'EMPATOU!!!';
+  } else if ((comput[computResult] === 'pedra') && (yourResult === 'papel')) {
+    winningPlayer();
+  } else if (comput[computResult] === 'pedra' && yourResult === 'tesoura') {
+    winningComputer();
+  } else if (comput[computResult] === 'papel' && yourResult === 'pedra') {
+    winningComputer();
+  } else if (comput[computResult] === 'papel' && yourResult === 'papel') {
+    h1Result.innerHTML = 'EMPATOU!!!';
+  } else if (comput[computResult] === 'papel' && yourResult === 'tesoura') {
+    winningPlayer();
+  } else if (comput[computResult] === 'tesoura' && yourResult === 'pedra') {
+    winningPlayer();
+  } else if (comput[computResult] === 'tesoura' && yourResult === 'papel') {
+    winningComputer();
+  } else if (comput[computResult] === 'tesoura' && yourResult === 'tesoura') {
+    h1Result.innerHTML = 'EMPATOU!!!';
+  }
+}
+
+function winningPlayer() {
+  h1Result.innerHTML = 'VOCÊ GANHOU!!!';
+  contYour += 1;
+  inputPoints(contComputer, contYour);
+}
+
+function winningComputer() {
+  h1Result.innerHTML = 'VOCÊ PERDEU!!!';
+    contComputer += 1
+    inputPoints(contComputer, contYour);
 }
 
 function cleanPlayer() {
